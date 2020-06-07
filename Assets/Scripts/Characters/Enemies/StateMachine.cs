@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class StateMachine : MonoBehaviour
 {
-    protected State currentState;
+    protected State currentState = null;
 
     public void setState(State state){
         if(currentState != null)
@@ -11,6 +11,7 @@ public abstract class StateMachine : MonoBehaviour
         }
 
         currentState = state;
+        Debug.ClearDeveloperConsole();
 
           if(currentState != null)
         {
