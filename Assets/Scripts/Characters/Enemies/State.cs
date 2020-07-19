@@ -10,6 +10,7 @@ public abstract class State
     public virtual void Exit(){} 
 
     public abstract void Update();
+    public abstract void FixedUpdate();
 
     public State(EnemyBehavior _character)
     {

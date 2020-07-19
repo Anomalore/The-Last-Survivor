@@ -12,16 +12,27 @@ public class CharacterBehavior : MonoBehaviour
     [SerializeField] Camera cam = null;
     [SerializeField] LayerMask floor;
     [SerializeField] float cameraRayLength = 100f;
+    [SerializeField] Health health;
+    [SerializeField]Gun playerGun;
     void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
         input = Vector2.zero;
         floor = LayerMask.GetMask("Floor");
+        health = GetComponent<Health>();
+        playerGun= GetComponentInChildren<Gun>();
     }
 
     private void Update() 
-    {
-        GetInput();
+    {  
+        if(health.getHealth() > 0)
+        {
+            GetInput();
+            if(Input.GetMouseButtonDown(0))
+            {
+            playerGun.ShootBullet();
+            }
+        }
     }
 
     private void LookAt()
@@ -46,7 +57,10 @@ public class CharacterBehavior : MonoBehaviour
     {
         Vector3 positionToMoveTo = new Vector3(input.x, 0.0f, input.y);
         rb.MovePosition((Vector3)transform.position + (positionToMoveTo * speed * Time.fixedDeltaTime));
+        if(health.getHealth() > 0)
+        {
         LookAt();
+        }
     }
 
     private void GetInput()
