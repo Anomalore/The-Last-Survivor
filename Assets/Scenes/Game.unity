@@ -1843,10 +1843,15 @@ PrefabInstance:
       propertyPath: magazine
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2747855898522437223, guid: 0a044f1712746be46b90fe0a89af934d,
+        type: 3}
+      propertyPath: shootingIntervals
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2747855900311846804, guid: 0a044f1712746be46b90fe0a89af934d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.111
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2900571431749607635, guid: 0a044f1712746be46b90fe0a89af934d,
         type: 3}

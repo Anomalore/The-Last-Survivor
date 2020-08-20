@@ -18,13 +18,20 @@ public class Gun : MonoBehaviour
     public TextMeshProUGUI roundsText;
     public TextMeshProUGUI reservesText;
     [SerializeField] private float reloadTime;
+    private bool canShoot;
+    [SerializeField] float shootingIntervals;
+    private float shootTimer;
 
     public int _reserves{get{return reserves;} set{reserves = value;}}
     public int _magazine{get{return magazine;} set{magazine = value;}}
+    public bool _canShoot{get{return canShoot;} set{canShoot = value;}}
+
 
     private void Start() 
     {
+        shootTimer = shootingIntervals;
         isReloading = false;
+        canShoot = true;
         rounds = magazine;
         roundsText = GameObject.Find("Canvas/Rounds HUD").GetComponent<TextMeshProUGUI>();
         reservesText = GameObject.Find("Canvas/Reserves HUD").GetComponent<TextMeshProUGUI>();
@@ -37,7 +44,16 @@ public class Gun : MonoBehaviour
     {
         if(isReloading == true) return;
 
-        print("Hello");
+        if(shootTimer <= 0)
+        {
+            canShoot = true;
+            shootTimer = shootingIntervals;
+        }
+
+        if(canShoot == false)
+        {
+            shootTimer -= Time.deltaTime;
+        }
 
         if(Input.GetKeyDown(KeyCode.R))
         {
@@ -66,6 +82,7 @@ public class Gun : MonoBehaviour
         if(isReloading == true) return;
         if(rounds <= 0 && reserves <= 0) return;
         
+        canShoot = false;
         rounds--;
 
         updateText();

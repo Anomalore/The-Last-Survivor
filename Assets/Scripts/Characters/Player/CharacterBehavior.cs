@@ -30,7 +30,7 @@ public class CharacterBehavior : MonoBehaviour
         if(health.getHealth() > 0)
         {
             GetInput();
-            if(Input.GetMouseButtonDown(0))
+            if(Input.GetMouseButtonDown(0) && playerGun._canShoot)
             {
                 playerGun.ShootBullet();
             }
