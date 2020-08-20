@@ -12,9 +12,11 @@ public class EnemyBehavior : StateMachine
     [SerializeField]private float stopDistance;
     [SerializeField]private Rigidbody agent;
     [SerializeField]private float ChaseSpeed;
-    [SerializeField] Health health;
+    [SerializeField] private Health health;
+    [SerializeField] private float Timer = 0;
 
-    [SerializeField]private float Timer = 0;
+    [Header("Items to Drop")]
+    [SerializeField] private GameObject[] droppables;
 
 
     public float _sightRange{get{return sightRange;} set{sightRange = value;}}
@@ -24,6 +26,8 @@ public class EnemyBehavior : StateMachine
     public float _ChaseSpeed{get{return ChaseSpeed;} set{ChaseSpeed = value;}}
     public float _Timer{get{return Timer;} set{Timer = value;}}
     public int _AttackDamage{get{return AttackDamage;} set{AttackDamage = value;}}
+    public GameObject[] _droppables{get{return droppables;} set{droppables = value;}}
+
     
     void Awake()
     {
@@ -37,7 +41,7 @@ public class EnemyBehavior : StateMachine
     {   
         if(health.getHealth() <= 0)
         {
-            Destroy(this.gameObject);
+            setState(new Die(this));
         }
         if(currentState == null) return;
         currentState.Update();

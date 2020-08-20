@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1325494650083001924}
   m_Layer: 0
   m_Name: Left_Arm
-  m_TagString: Untagged
+  m_TagString: Hittable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -291,8 +291,12 @@ MonoBehaviour:
   stopDistance: 2
   agent: {fileID: 2772878084127087433}
   ChaseSpeed: 0.35
-  health: {fileID: 0}
+  health: {fileID: 2833712096237247464}
   Timer: 0
+  droppables:
+  - {fileID: 7664698199088339376, guid: 0c56f780c14014f40b4c10f570ae1b68, type: 3}
+  - {fileID: 7664698199088339376, guid: 0c56f780c14014f40b4c10f570ae1b68, type: 3}
+  - {fileID: 7664698199088339376, guid: 0c56f780c14014f40b4c10f570ae1b68, type: 3}
 --- !u!114 &2833712096237247464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,7 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 40
   maxHealth: 40
-  bar: {fileID: 0}
+  bar: {fileID: 1025472811470881922}
 --- !u!1 &2241816513943430498
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,7 +325,7 @@ GameObject:
   - component: {fileID: 2241816513943430500}
   m_Layer: 0
   m_Name: Eye
-  m_TagString: Untagged
+  m_TagString: Hittable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -401,7 +405,7 @@ GameObject:
   - component: {fileID: 5704178771597680459}
   m_Layer: 0
   m_Name: Right_Arm
-  m_TagString: Untagged
+  m_TagString: Hittable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -616,3 +620,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 3638681921977304675}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1025472811470881922 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4342604716595528417, guid: f3b3d84406f2032418a41ec0bd030fcc,
+    type: 3}
+  m_PrefabInstance: {fileID: 3638681921977304675}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc923b470b4221140a0df3dfaf50b343, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

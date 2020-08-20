@@ -17,7 +17,7 @@ public class PickUp : MonoBehaviour
     {
 
         Gun playerGun = player.GetComponentInChildren<Gun>();
-        playerGun._reserves += playerGun._magazine;
+        playerGun._reserves += playerGun._magazine * 2;
         playerGun.updateText();
 
         Destroy(transform.parent.gameObject);

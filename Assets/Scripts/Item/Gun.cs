@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -8,22 +7,24 @@ public class Gun : MonoBehaviour
 {
     
     [SerializeField]private int damage = 10;
-    [SerializeField]private float range = 100f;
+    public float range = 100f;
     [SerializeField]private int magazine = 10;
     [SerializeField]private int rounds;
     [SerializeField]private int reserves;
-
-    [SerializeField]private Camera cam;
+    private bool isReloading;
+    public Camera cam;
     [SerializeField]private GameObject bullet;
     [SerializeField]private Transform BulletSpawn;
     public TextMeshProUGUI roundsText;
     public TextMeshProUGUI reservesText;
+    [SerializeField] private float reloadTime;
 
     public int _reserves{get{return reserves;} set{reserves = value;}}
     public int _magazine{get{return magazine;} set{magazine = value;}}
 
     private void Start() 
     {
+        isReloading = false;
         rounds = magazine;
         roundsText = GameObject.Find("Canvas/Rounds HUD").GetComponent<TextMeshProUGUI>();
         reservesText = GameObject.Find("Canvas/Reserves HUD").GetComponent<TextMeshProUGUI>();
@@ -32,15 +33,25 @@ public class Gun : MonoBehaviour
 
     }
 
-    public void ShootBullet()
+    void Update()
     {
-        if(rounds <= 0 && reserves <= 0) return;
-        if(rounds <= 0)
+        if(isReloading == true) return;
+
+        print("Hello");
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(reload());
+            return;
+        }
+
+        if(rounds <= 0 && Input.GetMouseButtonDown(0))
         {
             if(reserves >= magazine)
             {
-                rounds += magazine;
-                reserves -= magazine;
+                
+                StartCoroutine(reload());
+                return;
             }
             else
             {
@@ -48,7 +59,13 @@ public class Gun : MonoBehaviour
                 reserves -= reserves;
             }
         }
+    }
 
+    public void ShootBullet()
+    {
+        if(isReloading == true) return;
+        if(rounds <= 0 && reserves <= 0) return;
+        
         rounds--;
 
         updateText();
@@ -58,22 +75,29 @@ public class Gun : MonoBehaviour
         shotBulletScript._damage = damage;
     }
 
-    private void SniperShoot()
+    private IEnumerator reload()
     {
-        RaycastHit hitInfo;
-        if(Physics.Raycast(transform.position, transform.forward, out hitInfo, range))
-        {
-            Health target = hitInfo.transform.GetComponent<Health>();
-            if(target != null)
-            {
-                target.damage((int)damage);
-            }
-        }
+        isReloading = true;
+        yield return new WaitForSeconds(reloadTime);
+
+        int reloadAmount = magazine - rounds;
+
+        rounds += reloadAmount;
+        reserves -= reloadAmount;
+
+        updateText();
+
+        isReloading = false;
     }
 
     public void updateText()
     {
         roundsText.text = "Rounds: " + rounds;
         reservesText.text = "Reserves: " + reserves;
+    }
+
+    private void OnDrawGizmos() 
+    {
+        
     }
 }

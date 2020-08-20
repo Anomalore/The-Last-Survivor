@@ -14,6 +14,8 @@ public class CharacterBehavior : MonoBehaviour
     [SerializeField] float cameraRayLength = 100f;
     [SerializeField] Health health;
     [SerializeField]Gun playerGun;
+    [SerializeField]private float sensitivity;
+
     void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -30,38 +32,45 @@ public class CharacterBehavior : MonoBehaviour
             GetInput();
             if(Input.GetMouseButtonDown(0))
             {
-            playerGun.ShootBullet();
+                playerGun.ShootBullet();
             }
+        }
+
+        if (health.getHealth() > 0)
+        {
+            LookAt();
         }
     }
 
     private void LookAt()
     {
-        Ray camRay = cam.ScreenPointToRay(Input.mousePosition);
+        Vector3 Direction = cam.transform.forward;
+        Direction.y = 0;
 
-        RaycastHit hit;
-
-        if(Physics.Raycast(camRay, out hit, cameraRayLength, floor))
-        {
-            Vector3 playerToMouse = hit.point - transform.position;
-            playerToMouse.y = 0.0f;
-            Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
-            GameObject PlayerMesh = gameObject.transform.GetChild(0).gameObject;
-            PlayerMesh.transform.rotation = newRotation;
-        }
-
-
+        transform.rotation = Quaternion.LookRotation(Direction);
     }
 
     void FixedUpdate()
     {
-        Vector3 positionToMoveTo = new Vector3(input.x, 0.0f, input.y);
-        rb.MovePosition((Vector3)transform.position + (positionToMoveTo * speed * Time.fixedDeltaTime));
-        if(health.getHealth() > 0)
-        {
-        LookAt();
-        }
+        Move();
+        
     }
+
+    private void Move()
+    {
+        Vector3 CamF = cam.transform.forward;
+        Vector3 CamR = cam.transform.right;
+
+        CamF.y = 0;
+        CamR.y = 0;
+
+        CamF = CamF.normalized;
+        CamR = CamR.normalized;
+
+        Vector3 positionToMoveTo = CamF * input.y + CamR * input.x;
+        rb.MovePosition((Vector3)transform.position + (positionToMoveTo * speed * Time.fixedDeltaTime));
+    }
+
 
     private void GetInput()
     {

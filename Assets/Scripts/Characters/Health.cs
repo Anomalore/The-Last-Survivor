@@ -8,8 +8,15 @@ public class Health : MonoBehaviour
 
     private void Start() 
     {
-        bar = GetComponentInChildren<HealthBar>();
-        bar.setMaxHealth(maxHealth);
+        if(gameObject.tag == "Player")
+        {
+            bar.setMaxHealth(maxHealth);
+        }
+        else
+        {
+            bar = GetComponentInChildren<HealthBar>();
+            bar.setMaxHealth(maxHealth);
+        }   
     }
     public Health(int _maxHealth){
         maxHealth = _maxHealth;

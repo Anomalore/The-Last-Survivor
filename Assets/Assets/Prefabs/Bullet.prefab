@@ -124,4 +124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3568580761314927597}
-  speed: 25
+  gunObject: {fileID: 0}
+  speed: 150
+  lifeDuration: 2
+  lifeTimer: 0
+  damage: 0
