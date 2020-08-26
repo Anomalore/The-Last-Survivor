@@ -8,7 +8,7 @@ public class Follow : MonoBehaviour
     private Vector3 offset;
     private void Awake() 
     {
-        offset = transform.position;
+        offset = transform.position - followObject.transform.position;
     }
     void FixedUpdate()
     {

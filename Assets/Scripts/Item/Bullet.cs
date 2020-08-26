@@ -6,13 +6,11 @@ public class Bullet : MonoBehaviour
 {   
     [SerializeField]private Rigidbody rb;
     [SerializeField]private GameObject gunObject;
-    [SerializeField]private float speed = 10.0f;
+    [SerializeField]private float speed;
     [SerializeField]private float lifeDuration = 2.0f;
     [SerializeField]private float lifeTimer;
     [SerializeField]private int damage;
-    private Vector3 bulletDirection;
-
-    
+    private Vector3 CamerasPosition;
     public int _damage{get{return damage;} set{damage = value;}}
 
     
@@ -21,16 +19,10 @@ public class Bullet : MonoBehaviour
         gunObject = GameObject.FindGameObjectWithTag("Gun");
         lifeTimer = lifeDuration;
         rb = GetComponent<Rigidbody>();
-        FindShootLocation();
     }
     
-
-
     void Update()
     {
-        Vector3 moveDir = (bulletDirection - transform.position).normalized;
-
-        rb.MovePosition(transform.position + (moveDir* speed * Time.deltaTime));
         lifeTimer -= Time.deltaTime;
         if(lifeTimer <= 0)
         {
@@ -38,20 +30,9 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private void FindShootLocation()
+    private void FixedUpdate() 
     {
-        RaycastHit hitInfo;
-        if(Physics.Raycast(gunObject.GetComponent<Gun>().cam.transform.position, gunObject.GetComponent<Gun>().cam.transform.forward, out hitInfo, gunObject.GetComponent<Gun>().range))
-        {
-            bulletDirection = hitInfo.point;
-        }
-        else
-        {
-            Vector3 point = gunObject.GetComponent<Gun>().cam.transform.position + (gunObject.GetComponent<Gun>().cam.transform.forward * gunObject.GetComponent<Gun>().range);
-            bulletDirection = point;
-        }
-
-
+        rb.MovePosition((transform.position + transform.forward * Time.fixedDeltaTime * speed));
     }
     
     private void OnTriggerEnter(Collider other) 
@@ -67,13 +48,14 @@ public class Bullet : MonoBehaviour
             enemyHealth.damage(5);
             Destroy(this.gameObject);
         }
+        else if(other.tag == "Enviroment")
+        {
+            Destroy(this.gameObject);
+        }
         else
         {
             Destroy(this.gameObject);
         }
     }
 
-    private void OnDrawGizmos() 
-    {
-    }
 }

@@ -298,8 +298,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
   m_IsActive: 1
---- !u!64 &52634540
-MeshCollider:
+--- !u!65 &52634540
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -308,10 +308,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  serializedVersion: 2
+  m_Size: {x: 10, y: 1, z: 10}
+  m_Center: {x: 0, y: -0.5, z: 0}
 --- !u!23 &52634541
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -650,7 +649,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &675554588
 GameObject:
@@ -665,7 +664,7 @@ GameObject:
   - component: {fileID: 675554590}
   - component: {fileID: 675554589}
   m_Layer: 0
-  m_Name: Sphere (4)
+  m_Name: Rock 5
   m_TagString: Enviroment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -792,7 +791,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1152150031 stripped
 Transform:
@@ -837,12 +836,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241261345}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.97, z: 0}
+  m_LocalRotation: {x: -0.7064338, y: -0.47771442, z: -0.030843567, w: 0.5213338}
+  m_LocalPosition: {x: 1.7698894, y: -3.3563347, z: 1.7698894}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_Father: {fileID: 2138677393}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1303063231
 GameObject:
@@ -857,7 +856,7 @@ GameObject:
   - component: {fileID: 1303063233}
   - component: {fileID: 1303063232}
   m_Layer: 0
-  m_Name: Sphere (3)
+  m_Name: Rock 4
   m_TagString: Enviroment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -950,7 +949,7 @@ GameObject:
   - component: {fileID: 1433216583}
   - component: {fileID: 1433216582}
   m_Layer: 0
-  m_Name: Sphere (2)
+  m_Name: Rock 3
   m_TagString: Enviroment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1330,7 +1329,7 @@ GameObject:
   - component: {fileID: 1537310583}
   - component: {fileID: 1537310582}
   m_Layer: 0
-  m_Name: Sphere (1)
+  m_Name: Rock 2
   m_TagString: Enviroment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1505,7 +1504,7 @@ RectTransform:
   - {fileID: 1482864223}
   - {fileID: 548468377}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1546,7 +1545,7 @@ Transform:
   - {fileID: 675554592}
   - {fileID: 52634543}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1895290977 stripped
 MonoBehaviour:
@@ -1579,7 +1578,7 @@ GameObject:
   - component: {fileID: 2138237275}
   - component: {fileID: 2138237274}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Rock 1
   m_TagString: Enviroment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1747,9 +1746,10 @@ Transform:
   m_LocalRotation: {x: 0.7064338, y: 0.47771442, z: 0.030843567, w: 0.5213338}
   m_LocalPosition: {x: 0.24, y: 3, z: 4.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1241261347}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 45, y: 130, z: 90}
 --- !u!1001 &1036600015680512629
 PrefabInstance:
@@ -1806,7 +1806,7 @@ PrefabInstance:
     - target: {fileID: 1036600014532593786, guid: 0a044f1712746be46b90fe0a89af934d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1036600014532593786, guid: 0a044f1712746be46b90fe0a89af934d,
         type: 3}
@@ -1835,43 +1835,28 @@ PrefabInstance:
       objectReference: {fileID: 1501257723}
     - target: {fileID: 2747855898522437223, guid: 0a044f1712746be46b90fe0a89af934d,
         type: 3}
-      propertyPath: reloadTime
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2747855898522437223, guid: 0a044f1712746be46b90fe0a89af934d,
+      propertyPath: TPSCam
+      value: 
+      objectReference: {fileID: 1501257723}
+    - target: {fileID: 2747855900311846804, guid: 0a044f1712746be46b90fe0a89af934d,
         type: 3}
-      propertyPath: magazine
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2747855898522437223, guid: 0a044f1712746be46b90fe0a89af934d,
-        type: 3}
-      propertyPath: shootingIntervals
-      value: 0.1
+      propertyPath: m_LocalPosition.y
+      value: 0.345
       objectReference: {fileID: 0}
     - target: {fileID: 2747855900311846804, guid: 0a044f1712746be46b90fe0a89af934d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.5
+      value: 0.997
       objectReference: {fileID: 0}
-    - target: {fileID: 2900571431749607635, guid: 0a044f1712746be46b90fe0a89af934d,
+    - target: {fileID: 2900571431749607632, guid: 0a044f1712746be46b90fe0a89af934d,
         type: 3}
-      propertyPath: m_TagString
-      value: Gun
+      propertyPath: m_LocalPosition.z
+      value: 0.486
       objectReference: {fileID: 0}
-    - target: {fileID: 3504272582201893096, guid: 0a044f1712746be46b90fe0a89af934d,
+    - target: {fileID: 2900571431749607632, guid: 0a044f1712746be46b90fe0a89af934d,
         type: 3}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6640808528081947008, guid: 0a044f1712746be46b90fe0a89af934d,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6640808528081947008, guid: 0a044f1712746be46b90fe0a89af934d,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
+      propertyPath: m_LocalPosition.y
+      value: -0.097
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a044f1712746be46b90fe0a89af934d, type: 3}

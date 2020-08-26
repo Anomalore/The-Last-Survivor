@@ -14,7 +14,10 @@ public class CharacterBehavior : MonoBehaviour
     [SerializeField] float cameraRayLength = 100f;
     [SerializeField] Health health;
     [SerializeField]Gun playerGun;
-    [SerializeField]private float sensitivity;
+    [SerializeField] private float sensitivity;
+    [SerializeField] private float jumpForce;
+    private float distToGround;
+    private bool jump;
 
     void Awake()
     {
@@ -23,12 +26,22 @@ public class CharacterBehavior : MonoBehaviour
         floor = LayerMask.GetMask("Floor");
         health = GetComponent<Health>();
         playerGun= GetComponentInChildren<Gun>();
+        distToGround = GetComponent<Collider>().bounds.extents.y;
     }
 
     private void Update() 
     {  
         if(health.getHealth() > 0)
         {
+            if(Input.GetButtonDown("Jump") && IsGrounded())
+            {
+                jump = true;
+            }
+            if(IsGrounded() == false)
+            {
+                jump = false;
+            }
+
             GetInput();
             if(Input.GetMouseButtonDown(0) && playerGun._canShoot)
             {
@@ -42,6 +55,11 @@ public class CharacterBehavior : MonoBehaviour
         }
     }
 
+    private bool IsGrounded()  
+    {
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
+    }
+
     private void LookAt()
     {
         Vector3 Direction = cam.transform.forward;
@@ -52,8 +70,7 @@ public class CharacterBehavior : MonoBehaviour
 
     void FixedUpdate()
     {
-        Move();
-        
+        Move(); 
     }
 
     private void Move()
@@ -69,6 +86,11 @@ public class CharacterBehavior : MonoBehaviour
 
         Vector3 positionToMoveTo = CamF * input.y + CamR * input.x;
         rb.MovePosition((Vector3)transform.position + (positionToMoveTo * speed * Time.fixedDeltaTime));
+
+        if(jump && IsGrounded())
+        {
+            rb.velocity = new Vector3(rb.velocity.x, jumpForce ,rb.velocity.z);
+        }
     }
 
 
