@@ -15,9 +15,15 @@ public class CharacterBehavior : MonoBehaviour
     [SerializeField] Health health;
     [SerializeField]Gun playerGun;
     [SerializeField] private float sensitivity;
+    [SerializeField] private Animator animator;
     [SerializeField] private float jumpForce;
+
+    [Header("Tweaking")]
+    [SerializeField] float StopAimingTimer = 0.0f;
     private float distToGround;
     private bool jump;
+    Vector3 LookDirection;
+    
 
     void Awake()
     {
@@ -62,10 +68,36 @@ public class CharacterBehavior : MonoBehaviour
 
     private void LookAt()
     {
-        Vector3 Direction = cam.transform.forward;
-        Direction.y = 0;
+        Vector3 CamF = cam.transform.forward;
+        Vector3 CamR = cam.transform.right;
+        float inputCheck = input.magnitude;   
+        
+        if(StopAimingTimer > 0)
+        {
+            inputCheck = 0.0f;
+            StopAimingTimer -= Time.deltaTime;
+        }
 
-        transform.rotation = Quaternion.LookRotation(Direction);
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            StopAimingTimer = 1.0f;
+            inputCheck = 0;
+            LookDirection = CamF;
+            LookDirection.y = 0;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(LookDirection), Time.deltaTime * speed);
+            return;
+        }
+        
+
+        if(inputCheck > 0 && StopAimingTimer <= 0)
+        {   
+            LookDirection = input.y * CamF + input.x * CamR; 
+            LookDirection.y = 0;
+        } 
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(LookDirection), Time.deltaTime * speed);
+
     }
 
     void FixedUpdate()
@@ -86,6 +118,9 @@ public class CharacterBehavior : MonoBehaviour
 
         Vector3 positionToMoveTo = CamF * input.y + CamR * input.x;
         rb.MovePosition((Vector3)transform.position + (positionToMoveTo * speed * Time.fixedDeltaTime));
+
+        animator.SetFloat("VelX", input.x);
+        animator.SetFloat("VelY", input.y);
 
         if(jump && IsGrounded())
         {

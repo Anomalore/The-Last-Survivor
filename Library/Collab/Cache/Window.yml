@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 61
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffe70aba2e7074048aca5de573b64a59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SimpleSelectedItems:
+    m_Keys:
+    - Assets/AmmoBox/Materials/AmmoBox.mat
+    - Assets/Assets/Animations/PlayerAC.controller
+    - Assets/Assets/Animations/PlayerAC.controller.meta
+    - Assets/Assets/Blender/Character_Place_Holder.fbx
+    - Assets/Assets/Blender/Character_Place_Holder.fbx.meta
+    - Assets/Assets/Prefabs/Player.prefab
+    - Assets/Materials/PBR Materials/Enemy Placeholder.mat
+    - Assets/Materials/PBR Materials/Ground Placeholder.mat
+    - Assets/Materials/PBR Materials/Player Placeholder.mat
+    - Assets/Materials/PBR Materials/White.mat
+    - Assets/Scenes/Game.unity
+    - Assets/Scripts/Characters/Player/CharacterBehavior.cs
+    - Assets/Scripts/Item/Bullet.cs
+    - Assets/Scripts/Item/Gun.cs
+    - Assets/Settings/SampleSceneProfile.asset
+    - Packages/manifest.json
+    - Packages/packages-lock.json
+    - ProjectSettings/ProjectVersion.txt
+    - ProjectSettings/VersionControlSettings.asset
+    - 
+    m_Values: 0000000000000000000000000000000000000000
+  RevisionSummary: 
+  ChangesSearchValue: 
+  SelectedHistoryRevision: 
+  HistoryPageNumber: 0
+  TabIndex: 0

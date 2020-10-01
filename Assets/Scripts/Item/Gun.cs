@@ -55,7 +55,7 @@ public class Gun : MonoBehaviour
 
     void LateUpdate() 
     {
-        transform.LookAt(lookObject);
+        
     }
     private void checkReload()
     {
@@ -108,7 +108,6 @@ public class Gun : MonoBehaviour
             Vector3 point = cameraRay.origin + (cameraRay.direction * range);
             lookObject = point;
         }
-
     }
 
     public void ShootBullet()
@@ -123,6 +122,8 @@ public class Gun : MonoBehaviour
 
         GameObject shotBullet = Instantiate(bullet, BulletSpawn.position, transform.rotation);
         Bullet shotBulletScript = shotBullet.GetComponent<Bullet>();
+        Vector3 direction = (lookObject - transform.position).normalized;
+        shotBulletScript._Direction = direction;
         shotBulletScript._damage = damage;
     }
 

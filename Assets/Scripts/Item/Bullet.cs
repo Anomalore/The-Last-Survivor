@@ -11,7 +11,9 @@ public class Bullet : MonoBehaviour
     [SerializeField]private float lifeTimer;
     [SerializeField]private int damage;
     private Vector3 CamerasPosition;
+    private Vector3 direction;
     public int _damage{get{return damage;} set{damage = value;}}
+    public Vector3 _Direction{get{return direction;} set{direction = value;}}
 
     
     void Start()
@@ -32,7 +34,9 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate() 
     {
-        rb.MovePosition((transform.position + transform.forward * Time.fixedDeltaTime * speed));
+
+
+        rb.MovePosition((transform.position + direction * Time.fixedDeltaTime * speed));
     }
     
     private void OnTriggerEnter(Collider other) 
