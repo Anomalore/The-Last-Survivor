@@ -119,8 +119,12 @@ public class CharacterBehavior : MonoBehaviour
         Vector3 positionToMoveTo = CamF * input.y + CamR * input.x;
         rb.MovePosition((Vector3)transform.position + (positionToMoveTo * speed * Time.fixedDeltaTime));
 
-        animator.SetFloat("VelX", input.x);
-        animator.SetFloat("VelY", input.y);
+
+        if(animator != null)
+        {
+            animator.SetFloat("VelX", input.x);
+            animator.SetFloat("VelY", input.y);
+        }
 
         if(jump && IsGrounded())
         {

@@ -5,69 +5,39 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private GameObject followObject;
-
-    [SerializeField] private float desiredDistance;
-    [SerializeField] float minClamp;
-    [SerializeField] float maxClamp;
+    [SerializeField] private float desiredDistance, minDistance;
+    [SerializeField] private float distance;
+    [SerializeField]private float smooth;
+    private Vector3 dollyDir;
     Vector3 direction;
-
-    private float xInput, yInput;
     Ray ray;
+    Vector3 desiredPos;
 
     private void Start() 
     {
+        desiredDistance = Vector3.Distance(transform.position, transform.parent.position);
+        dollyDir = transform.localPosition.normalized;
+        distance = transform.localPosition.magnitude;
         Cursor.lockState = CursorLockMode.Locked;
         direction = transform.forward;
     }
 
     private void Update() 
     {
-        GetInput();
-    }
+        desiredPos = transform.parent.TransformPoint(dollyDir * desiredDistance);
+        RaycastHit hit;
+        ray = new Ray(transform.parent.position, -transform.parent.position + desiredPos);
 
-    private void GetInput()
-    {
-        xInput = Input.GetAxisRaw("Mouse X") * Time.fixedDeltaTime * 360;
-        yInput = -Input.GetAxisRaw("Mouse Y") * Time.fixedDeltaTime * 360;    
-    }
-
-    void FixedUpdate()
-    {
-
-        Vector3 desiredPosition;
-        
-        Quaternion q = Quaternion.AngleAxis(xInput, transform.up);
-        Quaternion w = Quaternion.AngleAxis(yInput, transform.right);
-
-        float angleDifference = Vector3.Angle(w * direction, Vector3.up);
-        
-        if(maxClamp > angleDifference && angleDifference > minClamp)
+        if(Physics.Raycast(ray, out hit))
         {
-            direction = w * q * direction;
+            distance = Mathf.Clamp((hit.distance * 0.9f) ,minDistance, desiredDistance);
         }
         else
         {
-            direction = q * direction;
+            distance = desiredDistance;
         }
-
-        ray = new Ray(followObject.transform.position, -direction);
-
-        bool wallInWay = Physics.Raycast(ray, out RaycastHit hit, desiredDistance);
-
-        if(wallInWay)
-        {
-            desiredPosition = ray.origin + ray.direction.normalized * hit.distance;
-            transform.position = desiredPosition;
-        }
-        else
-        {
-            desiredPosition =  ray.origin + ray.direction.normalized * desiredDistance;
-            transform.position = Vector3.Lerp(transform.position, desiredPosition, 1f);
-        }
-
+        transform.localPosition = Vector3.Lerp(transform.localPosition, dollyDir * distance, Time.deltaTime * smooth);
         
-        transform.LookAt(followObject.transform);
     }
 
     private Vector3 GetNearClipPlaneHalfExtents()
@@ -90,19 +60,11 @@ public class CameraController : MonoBehaviour
         // This can be adjusted if you need more tolerance
         return new Vector3((max.x - min.x) / 2.0f, (max.y - min.y) / 2.0f, 0.01f);
     }
-    private float ClampAngle(float angle, float min, float max)
+   
+    private void OnDrawGizmos() 
     {
-        if (angle<90 || angle>270)// if angle in the critic region...
-        {       
-            if (angle>180) angle -= 360;  // convert all angles to -180..+180
-            if (max>180) max -= 360;
-            if (min>180) min -= 360;
-        } 
-
-        angle = Mathf.Clamp(angle, min, max);
-        if (angle<0) angle += 360;  // if angle negative, convert to 0..360
-        return angle;
+        Gizmos.DrawSphere(desiredPos, 0.2f);
+        Gizmos.DrawRay(ray);
     }
-
 
 }

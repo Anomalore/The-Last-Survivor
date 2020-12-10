@@ -14,27 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/AmmoBox/Materials/AmmoBox.mat
-    - Assets/Assets/Animations/PlayerAC.controller
-    - Assets/Assets/Animations/PlayerAC.controller.meta
-    - Assets/Assets/Blender/Character_Place_Holder.fbx
-    - Assets/Assets/Blender/Character_Place_Holder.fbx.meta
+    - Assets/Assets/Prefabs/Bullet.prefab
     - Assets/Assets/Prefabs/Player.prefab
-    - Assets/Materials/PBR Materials/Enemy Placeholder.mat
-    - Assets/Materials/PBR Materials/Ground Placeholder.mat
-    - Assets/Materials/PBR Materials/Player Placeholder.mat
-    - Assets/Materials/PBR Materials/White.mat
     - Assets/Scenes/Game.unity
     - Assets/Scripts/Characters/Player/CharacterBehavior.cs
+    - Assets/Scripts/Game Behaviour/CameraController.cs
+    - Assets/Scripts/Game Behaviour/CameraPivot.cs
+    - Assets/Scripts/Game Behaviour/CameraPivot.cs.meta
     - Assets/Scripts/Item/Bullet.cs
-    - Assets/Scripts/Item/Gun.cs
-    - Assets/Settings/SampleSceneProfile.asset
-    - Packages/manifest.json
-    - Packages/packages-lock.json
-    - ProjectSettings/ProjectVersion.txt
-    - ProjectSettings/VersionControlSettings.asset
     - 
-    m_Values: 0000000000000000000000000000000000000000
+    m_Values: 010101010101010101
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 
