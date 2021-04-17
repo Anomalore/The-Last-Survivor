@@ -6,7 +6,7 @@ public class Attack : State
 {
     public override void Start()
     {
-        character._Timer = 2;
+        character._Timer = UnityEngine.Random.Range(1f,1.5f);
     }
 
     public override void Update()

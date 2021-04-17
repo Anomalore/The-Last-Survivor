@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1036600014532593786}
   - component: {fileID: 1036600014532593785}
-  - component: {fileID: 1036600014532593765}
+  - component: {fileID: 6956845262261929395}
   - component: {fileID: 4661957230274875692}
   - component: {fileID: 4150730511902963433}
   m_Layer: 0
@@ -33,6 +33,7 @@ Transform:
   m_Children:
   - {fileID: 2900571431749607632}
   - {fileID: 5356077532842774320}
+  - {fileID: 6807480725450048213}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -50,7 +51,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &1036600014532593765
+--- !u!54 &6956845262261929395
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,13 +59,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1036600014532593790}
   serializedVersion: 2
-  m_Mass: 60
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
+  m_Interpolate: 1
+  m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!114 &4661957230274875692
 MonoBehaviour:
@@ -79,17 +80,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  playerRotationSpeed: 25
   cam: {fileID: 0}
   floor:
     serializedVersion: 2
-    m_Bits: 0
-  cameraRayLength: 100
+    m_Bits: 8
   health: {fileID: 4150730511902963433}
   playerGun: {fileID: 2747855898522437223}
-  sensitivity: 0
   animator: {fileID: 0}
-  jumpForce: 10
+  jumpForce: 12
   StopAimingTimer: 0
+  StopAimingSetTime: 0.75
+  runSpeedMultiplyer: 1.5
+  isToggleRun: 0
+  runTimerReset: 0.1
 --- !u!114 &4150730511902963433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,8 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 136a3ef2ed145cb45b149a20bae33bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 0
+  health: 10
+  maxHealth: 10
   bar: {fileID: 0}
 --- !u!1 &4265613516317595001
 GameObject:
@@ -186,6 +190,36 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &4397376571130236376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6807480725450048213}
+  m_Layer: 0
+  m_Name: FollowOBJ
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6807480725450048213
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4397376571130236376}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.03, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1036600014532593786}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8344229024951740463
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -45,7 +45,7 @@ public class Bullet : MonoBehaviour
 
         foreach(RaycastHit hit in hits)
         {
-            print("oof");
+
             if(hit.collider.tag == "Hittable")
             {   
                 Health enemyHealth = hit.collider.gameObject.GetComponent<Health>();

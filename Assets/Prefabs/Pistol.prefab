@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: f9c8e144e1159304aae79f09b2c00859, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -188,6 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95ae83fac88d72f49b228c56d85b36cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TPSCam: {fileID: 0}
   range: 100
   rounds: 0
   reserves: 0
@@ -198,6 +199,7 @@ MonoBehaviour:
   bulletVelocity: 100
   bullet: {fileID: 992523923920786580, guid: 1d06944edc6050f4ea2ebbfdb6188eca, type: 3}
   BulletSpawn: {fileID: 6192150933129713595}
+  HUD: {fileID: 0}
 --- !u!1 &6873226435507220948
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +259,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: f9c8e144e1159304aae79f09b2c00859, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

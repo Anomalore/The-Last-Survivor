@@ -13,13 +13,13 @@ public class Die : State
 
     public override void Update()
     {
-
+        return;
     }
 
 
     public override void FixedUpdate()
     {
-        
+        return;
     }
 
     public void SpawnRandom()
@@ -30,6 +30,6 @@ public class Die : State
 
     public Die (EnemyBehavior character) : base (character)
     {
-        
+        return;
     }
 }

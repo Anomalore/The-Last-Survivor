@@ -222,6 +222,8 @@ GameObject:
   - component: {fileID: 2241816513558195468}
   - component: {fileID: 2241816513558195467}
   - component: {fileID: 2772878084127087433}
+  - component: {fileID: 6052638762435736676}
+  - component: {fileID: 2379951149752169552}
   m_Layer: 0
   m_Name: Zombie 1
   m_TagString: Hittable
@@ -275,6 +277,43 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &6052638762435736676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2241816513558195466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 136a3ef2ed145cb45b149a20bae33bcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 15
+  maxHealth: 15
+  bar: {fileID: 1025472811470881922}
+--- !u!114 &2379951149752169552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2241816513558195466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f36f82d5e21a341b154deeea6b672d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sightRange: 15
+  AttackDamage: 2
+  player: {fileID: 0}
+  stopDistance: 2
+  agent: {fileID: 2772878084127087433}
+  ChaseSpeed: 0.25
+  health: {fileID: 6052638762435736676}
+  Timer: 0
+  droppables:
+  - {fileID: 7664698199088339376, guid: 0c56f780c14014f40b4c10f570ae1b68, type: 3}
 --- !u!1 &2241816513943430498
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,11 +680,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4342604716595528417, guid: f3b3d84406f2032418a41ec0bd030fcc, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3b3d84406f2032418a41ec0bd030fcc, type: 3}
 --- !u!224 &2847398347767352550 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1584365864413743749, guid: f3b3d84406f2032418a41ec0bd030fcc, type: 3}
   m_PrefabInstance: {fileID: 3638681921977304675}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1025472811470881922 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4342604716595528417, guid: f3b3d84406f2032418a41ec0bd030fcc, type: 3}
+  m_PrefabInstance: {fileID: 3638681921977304675}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc923b470b4221140a0df3dfaf50b343, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
