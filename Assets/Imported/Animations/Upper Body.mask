@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Upper Body
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Body
+    m_Weight: 0
+  - m_Path: Injector_1
+    m_Weight: 0
+  - m_Path: Injector_2
+    m_Weight: 0
+  - m_Path: Mask
+    m_Weight: 0
+  - m_Path: Rig
+    m_Weight: 1
+  - m_Path: Rig/Hips
+    m_Weight: 0
+  - m_Path: Rig/Hips/Bottom_Spine
+    m_Weight: 0
+  - m_Path: Rig/Hips/Bottom_Spine/Middle_Spine
+    m_Weight: 0
+  - m_Path: Rig/Hips/Bottom_Spine/Middle_Spine/Top_Spine
+    m_Weight: 1
+  - m_Path: Rig/Hips/Bottom_Spine/Middle_Spine/Top_Spine/Left_Shoulder
+    m_Weight: 1
+  - m_Path: Rig/Hips/Bottom_Spine/Middle_Spine/Top_Spine/Left_Shoulder/Left_Arm
+    m_Weight: 1
+  - m_Path: Rig/Hips/Bottom_Spine/Middle_Spine/Top_Spine/Left_Shoulder/Left_Arm/Left_Fore_Arm
+    m_Weight: 1
+  - m_Path: Rig/Hips/Bottom_Spine/Middle_Spine/Top_Spine/Left_Shoulder/Left_Arm/Left_Fore_Arm/Left_Hand
+    m_Weight: 1
+  - m_Path: Rig/Hips/Bottom_Spine/Middle_Spine/Top_Spine/Neck
+    m_Weight: 1
+  - m_Path: Rig/Hips/Bottom_Spine/Middle_Spine/Top_Spine/Neck/Head
+    m_Weight: 1
+  - m_Path: Rig/Hips/Bottom_Spine/Middle_Spine/Top_Spine/Neck/Head/Head_Top_End
+    m_Weight: 1
+  - m_Path: Rig/Hips/Bottom_Spine/Middle_Spine/Top_Spine/Right_Shoulder
+    m_Weight: 1
+  - m_Path: Rig/Hips/Bottom_Spine/Middle_Spine/Top_Spine/Right_Shoulder/Right_Arm
+    m_Weight: 1
+  - m_Path: Rig/Hips/Bottom_Spine/Middle_Spine/Top_Spine/Right_Shoulder/Right_Arm/Right_Fore_Arm
+    m_Weight: 1
+  - m_Path: Rig/Hips/Bottom_Spine/Middle_Spine/Top_Spine/Right_Shoulder/Right_Arm/Right_Fore_Arm/Right_Hand
+    m_Weight: 1
+  - m_Path: Rig/Hips/Left_Hip
+    m_Weight: 0
+  - m_Path: Rig/Hips/Left_Upper_Leg
+    m_Weight: 0
+  - m_Path: Rig/Hips/Left_Upper_Leg/Left_Leg
+    m_Weight: 0
+  - m_Path: Rig/Hips/Left_Upper_Leg/Left_Leg/Left_Foot
+    m_Weight: 1
+  - m_Path: Rig/Hips/Right_Hip
+    m_Weight: 0
+  - m_Path: Rig/Hips/Right_Upper_Leg
+    m_Weight: 0
+  - m_Path: Rig/Hips/Right_Upper_Leg/Right_Leg
+    m_Weight: 0
+  - m_Path: Rig/Hips/Right_Upper_Leg/Right_Leg/Right_Foot
+    m_Weight: 1
+  - m_Path: Wrist_Band
+    m_Weight: 0

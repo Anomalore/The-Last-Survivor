@@ -7,7 +7,7 @@ public class Idle : State
     Quaternion newRotationNew = Quaternion.identity;
     public override void Start()
     {
-        character._Timer = 0;
+        character._timer = 0;
     }
 
     public override void Update()
@@ -35,8 +35,8 @@ public class Idle : State
         Quaternion newRotationOld;
         Vector3 newEulerRotation;
         
-        character._Timer += Time.deltaTime;
-        if(character._Timer >= Random.Range(3, 10))
+        character._timer += Time.deltaTime;
+        if(character._timer >= Random.Range(3, 10))
         {
             
             newRotationOld = Random.rotation;
@@ -44,7 +44,7 @@ public class Idle : State
             newEulerRotation.x = 0;
             newEulerRotation.z = 0;
             newRotationNew = Quaternion.Euler(newEulerRotation);   
-            character._Timer = 0.0f;         
+            character._timer = 0.0f;         
         }
         return newRotationNew;
     }

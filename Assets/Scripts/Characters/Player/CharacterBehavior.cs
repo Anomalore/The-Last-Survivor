@@ -9,14 +9,14 @@ public class CharacterBehavior : MonoBehaviour
     private Rigidbody rb;
     private Vector2 input;
     private Vector2 rawInput;
-    [SerializeField]private int speed = 0;
+    [SerializeField]private int baseSpeed = 0;
     [SerializeField]private int playerRotationSpeed = 0;
     [SerializeField] Camera cam = null;
     PlayerCam playerCam;
     [SerializeField] LayerMask floor;
     [SerializeField] Health health;
     [SerializeField]Gun playerGun;
-    [SerializeField] private Animator animator;
+    [SerializeField] private AnimController animationController;
     [SerializeField] private float jumpForce;
 
     [Header("Tweaking")]
@@ -29,22 +29,28 @@ public class CharacterBehavior : MonoBehaviour
     private bool RMBdown;
     Vector3 LookDirection;
     Vector3 CamF,CamR;
-    float slerpTimer = default;
     private bool toggleRun = false;
     private float runTimer;
     [SerializeField]private float runTimerReset;
+    [SerializeField]private float returnToForwardDirectionSpeed;
+    private float currentSpeed;
 
     void Awake()
-    {
+    {  
+        animationController = GetComponent<AnimController>();
         playerCam = cam.GetComponent<PlayerCam>();
         runTimer = runTimerReset;
-        slerpTimer = 0.0f;
         rb = gameObject.GetComponent<Rigidbody>();
         input = Vector2.zero;
         floor = LayerMask.GetMask("Floor");
         health = GetComponent<Health>();
         playerGun= GetComponentInChildren<Gun>();
         distToGround = GetComponent<Collider>().bounds.extents.y;
+    }
+
+    public bool isRunning ()
+    {
+        return Input.GetKey(KeyCode.LeftControl) == true && input.y > 0;
     }
 
     private void Update() 
@@ -59,14 +65,19 @@ public class CharacterBehavior : MonoBehaviour
                 RMBdown = true;
             }  
 
+
             if(Input.GetButtonDown("Jump") && IsGrounded())
             {
                 jump = true;
+                animationController.TriggerJumpAnimation();
+                StartCoroutine(animationController.Jump(1f));
             }
+
             if(IsGrounded() == false)
-            {
+            { 
                 jump = false;
             }
+
             if(Input.GetKeyDown(KeyCode.LeftControl))
             {
                 toggleRun = !toggleRun;
@@ -90,6 +101,7 @@ public class CharacterBehavior : MonoBehaviour
         }
     }
 
+
     private bool IsGrounded()  
     {   
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
@@ -97,8 +109,8 @@ public class CharacterBehavior : MonoBehaviour
 
     private void LookAt()
     {
-        Vector3 CamF = cam.transform.forward;
-        Vector3 CamR = cam.transform.right;
+        CamF = cam.transform.forward;
+        CamR = cam.transform.right;
         float inputCheck = input.magnitude;   
 
         if(StopAimingTimer > 0)
@@ -107,21 +119,13 @@ public class CharacterBehavior : MonoBehaviour
             StopAimingTimer -= Time.deltaTime;
             LookDirection = CamF;
             LookDirection.y = 0;
-            slerpTimer += Time.deltaTime;
-            if (slerpTimer <= StopAimingTimer/2)
-            {
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(LookDirection), Time.deltaTime * 75f);
-            }
-            else
-            {
-                transform.rotation = Quaternion.LookRotation(LookDirection);
-            }
+            
+            rb.MoveRotation(Quaternion.LookRotation(LookDirection));
         }
 
 
         if(RMBdown)
         {
-            slerpTimer = 0.0f;
             StopAimingTimer = StopAimingSetTime;
             inputCheck = 0;
             RMBdown = false;
@@ -132,13 +136,12 @@ public class CharacterBehavior : MonoBehaviour
         {   
             if(inputCheck > 0 )
             {
-                LookDirection = input.y * CamF + input.x * CamR; 
+                LookDirection =  CamF; 
                 LookDirection.y = 0;
             }
             
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(LookDirection),Time.deltaTime * playerRotationSpeed);
+            if(LookDirection.magnitude > Mathf.Epsilon) rb.MoveRotation(Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(LookDirection),Time.deltaTime * playerRotationSpeed));
         } 
-
 
 
 
@@ -154,7 +157,6 @@ public class CharacterBehavior : MonoBehaviour
 
     private void MovePlayer()
     {
-        Vector3 movePosition;
 
         CamF = cam.transform.forward;
         CamR = cam.transform.right;
@@ -165,49 +167,56 @@ public class CharacterBehavior : MonoBehaviour
         CamF = CamF.normalized;
         CamR = CamR.normalized;
 
-        if(jump)
-        {
-            rb.velocity = new Vector3(rb.velocity.x, jumpForce ,rb.velocity.z);
-        }
-        if(rb.velocity.y < 0)
-        {
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y - 0.5f ,rb.velocity.z);
-        }
-
-        Vector3 positionToMoveTo = CamF * input.y + CamR * input.x;
+        Vector3 positionToMoveTo = CamF * rawInput.y + CamR * rawInput.x;
 
         if(isToggleRun)
         {
             if(toggleRun == true)
             {
-                movePosition = (positionToMoveTo * speed * Time.fixedDeltaTime * runSpeedMultiplyer);
+                currentSpeed = baseSpeed * runSpeedMultiplyer;
             }
             else
             {
-                movePosition = (positionToMoveTo * speed * Time.fixedDeltaTime);
+                currentSpeed = baseSpeed;
             }
         }
         else
         {
-            if(Input.GetKey(KeyCode.LeftControl) && input.y >= 0)
+            if(Input.GetKey(KeyCode.LeftControl) && rawInput.y > 0)
             {
-                movePosition =  (positionToMoveTo * speed * Time.fixedDeltaTime * runSpeedMultiplyer);
+                currentSpeed = baseSpeed * runSpeedMultiplyer;
             }
             else
             {
-                movePosition = (positionToMoveTo * speed * Time.fixedDeltaTime);
+                currentSpeed = baseSpeed;
             }
         }
+            
+        rb.velocity = new Vector3(positionToMoveTo.x , 0, positionToMoveTo.z).normalized * 10f * currentSpeed * Time.fixedDeltaTime + new Vector3(0, rb.velocity.y, 0);
 
-        rb.MovePosition((Vector3)transform.position + movePosition);
-
-
-        if(animator != null)
+        if(jump)
         {
-            animator.SetFloat("VelX", input.x);
-            animator.SetFloat("VelY", input.y);
+            rb.velocity = new Vector3(rb.velocity.x, jumpForce ,rb.velocity.z);
         }
 
+
+
+        
+        if(rb.velocity.y < 0)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y - 0.5f ,rb.velocity.z);
+        }
+
+        if(StopAimingTimer > 0)
+        {
+            animationController.MovementAnimationNoAim(input);
+        }
+        else
+        {
+            animationController.MovementAnimationAim(rawInput, input, runSpeedMultiplyer);
+        }
+
+        animationController.setMovementAnimationSpeed(currentSpeed);
 
     }
 

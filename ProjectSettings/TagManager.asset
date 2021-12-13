@@ -6,17 +6,18 @@ TagManager:
   tags:
   - Hittable
   - Gun
+  - Enviroment
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Floor
+  - 
   - Water
   - UI
-  - Enviroment
   - 
   - 
-  - 
+  - Floor
+  - Hittable
   - 
   - 
   - 

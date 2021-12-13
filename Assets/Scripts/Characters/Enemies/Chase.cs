@@ -5,6 +5,7 @@ using UnityEngine;
 public class Chase : State 
 {
     private Vector3 EnemyToCharacter;
+    private Quaternion newRotation;
     public override void Start()
     {
         
@@ -22,17 +23,22 @@ public class Chase : State
         {
             character.setState(new Idle(character));
         }
+
+        MakeCalculations();
     }
 
-    private void chasePlayer()
+    void MakeCalculations()
     {
         EnemyToCharacter = character.transform.position - character._player.position;
 
         EnemyToCharacter.y = 0;
 
-        Quaternion newRotation = Quaternion.LookRotation(EnemyToCharacter);
-        character.transform.rotation = Quaternion.Lerp(character.transform.rotation, newRotation, 0.2f);
+        newRotation = Quaternion.LookRotation(EnemyToCharacter);
+    }
 
+    private void ChasePlayer()
+    {
+        character._agent.MoveRotation(Quaternion.Lerp(character.transform.rotation, newRotation, 0.2f));
         character._agent.MovePosition(character.transform.position - (EnemyToCharacter * Time.fixedDeltaTime * character._ChaseSpeed));
     }
 
@@ -43,7 +49,7 @@ public class Chase : State
 
     public override void FixedUpdate()
     {
-        chasePlayer();
+        ChasePlayer();
     }
 
     public Chase (EnemyBehavior character) : base (character)

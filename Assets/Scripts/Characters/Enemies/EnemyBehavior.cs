@@ -6,14 +6,18 @@ using UnityEngine.AI;
 public class EnemyBehavior : StateMachine
 {
 
-    [SerializeField]private float sightRange;
+    [Header("Stats")]
+    [SerializeField] private Health health;
     [SerializeField]private int AttackDamage;
+    [SerializeField]private float ChaseSpeed;
+    [SerializeField]private float sightRange;
+
+    [Header("Tweaking")]
     [SerializeField]private Transform player;
     [SerializeField]private float stopDistance;
     [SerializeField]private Rigidbody agent;
-    [SerializeField]private float ChaseSpeed;
-    [SerializeField] private Health health;
-    [SerializeField] private float Timer = 0;
+    [Header("Debugging")]
+    [SerializeField] private float timer = 0;
 
     [Header("Items to Drop")]
     [SerializeField] private GameObject[] droppables;
@@ -24,7 +28,7 @@ public class EnemyBehavior : StateMachine
     public Rigidbody _agent{get{return agent;} set{agent = value;}}
     public float _stopDistance{get{return stopDistance;} set{stopDistance = value;}}
     public float _ChaseSpeed{get{return ChaseSpeed;} set{ChaseSpeed = value;}}
-    public float _Timer{get{return Timer;} set{Timer = value;}}
+    public float _timer{get{return timer;} set{timer = value;}}
     public int _AttackDamage{get{return AttackDamage;} set{AttackDamage = value;}}
     public GameObject[] _droppables{get{return droppables;} set{droppables = value;}}
 

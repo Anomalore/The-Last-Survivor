@@ -6,7 +6,7 @@ public class Attack : State
 {
     public override void Start()
     {
-        character._Timer = UnityEngine.Random.Range(1f,1.5f);
+        character._timer = UnityEngine.Random.Range(1f,1.5f);
     }
 
     public override void Update()
@@ -22,10 +22,10 @@ public class Attack : State
 
     private void AttackPlayer()
     {
-        character._Timer += Time.deltaTime;
-        if(character._Timer >= 2)
+        character._timer += Time.deltaTime;
+        if(character._timer >= 2)
         {
-            character._Timer = 0;
+            character._timer = 0;
             character._player.GetComponent<Health>().damage(character._AttackDamage);
         }
     }
